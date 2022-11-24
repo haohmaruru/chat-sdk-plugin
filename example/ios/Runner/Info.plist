@@ -51,5 +51,12 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+    <key>NSBonjourServices</key>
+    <array>
+      <string>_dartobservatory._tcp</string>
+      <string>_hura.asia-dev._googlecast._tcp</string>
+    </array>
+    <key>NSLocalNetworkUsageDescription</key>
+    <string>${PRODUCT_NAME} sử dụng mạng cục bộ để khám phá các thiết bị hỗ trợ Cast trên mạng Wi-Fi của bạn.</string>
 </dict>
 </plist>

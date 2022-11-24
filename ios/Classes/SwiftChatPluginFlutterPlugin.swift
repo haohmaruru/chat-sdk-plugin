@@ -10,7 +10,7 @@ import NADomain
 
 public class SwiftChatPluginFlutterPlugin: NSObject, FlutterPlugin {
     private lazy var mainWindow = UIWindow(frame: UIScreen.main.bounds)
-    private var netAloFull: NetAloFullManager!
+    private var netAloSDK: NetAloFullManager!
     private var disposeBag = DisposeBag()
     
     public static func register(with registrar: FlutterPluginRegistrar) {
@@ -35,34 +35,6 @@ public class SwiftChatPluginFlutterPlugin: NSObject, FlutterPlugin {
     
     private func initChatSDK(call: FlutterMethodCall, result: @escaping FlutterResult){
         print("initChatSDK IOS")
-        
-        //        var config = NetaloConfiguration(
-        //            enviroment: .production,
-        //            appId: 1,
-        //            appKey: "appKey",
-        //            accountKey: "adminkey",
-        //            appGroupIdentifier: "group.vn.netacom.hura",
-        //            mailSupport: "",
-        //            analytics: [],
-        //            featureConfig: FeatureConfig(
-        //                user: FeatureConfig.UserConfig(
-        //                    forceUpdateProfile : true,
-        //                    allowCustomUsername: true,
-        //                    allowCustomProfile : true,
-        //                    allowCustomAlert   : true,
-        //                    allowAddContact    : false,
-        //                    allowBlockContact  : true,
-        //                    allowSetUserProfileUrl   : true,
-        //                    allowEnableLocationFeature: true,
-        //                    allowTrackingUsingSDK: true,
-        //                    allowTrackingBadgeNumber: true,
-        //                    allowRecieverChatInOA: false
-        //                ),
-        //                chat: FeatureConfig.ChatConfig(isVideoCallEnable: false,
-        //                                               isVoiceCallEnable: false),
-        //                isSyncDataInApp: true
-        //            ), userProfileUrl: "https://npyqgw0eplobj.vcdn.cloud"
-        //        )
         
         var config = NetaloConfiguration(
             enviroment: .development,
@@ -101,28 +73,26 @@ public class SwiftChatPluginFlutterPlugin: NSObject, FlutterPlugin {
             permissions:  [SDKPermissionSet.microPhone]
         )
         
-        self.netAloFull = NetAloFull(config: config)
+        self.netAloSDK = NetAloFullManager(config: config)
         
-        self.netAloFull
+        self.netAloSDK
             .start()
             .timeout(.seconds(10), scheduler: MainScheduler.instance)
             .catchAndReturn(())
-            .withUnretained(self)
             .observe(on: MainScheduler.instance)
-            .do(onNext: { (owner, _) in
-                // Init rooter
-                owner.netAloFull.buildSDKModule()
-            })
-                .subscribe()
-                .disposed(by: disposeBag)
-                
-                }
+            .withUnretained(self)
+            .do { owner, _ in
+                owner.netAloSDK.buildSDKModule()
+            }
+            .subscribe()
+            .disposed(by: self.disposeBag)
+    }
     
     private func openChatConversation(){
         print("openChatConversation IOS")
-        self.netAloFull.showListGroup { err in
-            
-        }
+        //        self.netAloSDK.showListGroup { err in
+        //
+        //        }
     }
     
     private func setUser(call: FlutterMethodCall,result: @escaping FlutterResult){

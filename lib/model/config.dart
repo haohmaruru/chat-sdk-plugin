@@ -103,6 +103,7 @@ class AndroidSetting {
 
 class IosConfig {
   String? appGroupIdentifier;
+  bool? forceUpdateProfile;
   bool? allowCustomUsername;
   bool? allowCustomProfile;
   bool? allowCustomAlert;
@@ -111,8 +112,21 @@ class IosConfig {
   bool? allowSetUserProfileUrl;
   bool? allowEnableLocationFeature;
 
+  bool? allowTrackingUsingSDK;
+  bool? isHiddenEditProfile;
+  bool? allowAddNewContact;
+  bool? allowEditContact;
+  bool? isVideoCallEnable;
+  bool? isVoiceCallEnable;
+  bool? isHiddenSecretChat;
+  bool? isSyncDataInApp;
+  bool? allowReferralCode;
+  bool? searchByLike;
+  bool? allowReplaceCountrycode;
+  bool? isSyncContactInApp;
   IosConfig({
     this.appGroupIdentifier,
+    this.forceUpdateProfile = true,
     this.allowCustomUsername = true,
     this.allowCustomProfile = true,
     this.allowCustomAlert = true,
@@ -120,9 +134,22 @@ class IosConfig {
     this.allowBlockContact = true,
     this.allowSetUserProfileUrl = true,
     this.allowEnableLocationFeature = true,
+    this.allowTrackingUsingSDK = true,
+    this.isHiddenEditProfile = true,
+    this.allowAddNewContact = true,
+    this.allowEditContact = true,
+    this.isVideoCallEnable = true,
+    this.isVoiceCallEnable = true,
+    this.isHiddenSecretChat = true,
+    this.isSyncDataInApp = true,
+    this.allowReferralCode = true,
+    this.searchByLike = true,
+    this.allowReplaceCountrycode = false,
+    this.isSyncContactInApp = true,
   });
   Map<String, dynamic> toJson() => {
         "appGroupIdentifier": appGroupIdentifier,
+        "forceUpdateProfile": forceUpdateProfile,
         "allowCustomUsername": allowCustomUsername,
         "allowCustomProfile": allowCustomProfile,
         "allowCustomAlert": allowCustomAlert,
@@ -130,5 +157,17 @@ class IosConfig {
         "allowBlockContact": allowBlockContact,
         "allowSetUserProfileUrl": allowSetUserProfileUrl,
         "allowEnableLocationFeature": allowEnableLocationFeature,
+        "allowTrackingUsingSDK": allowTrackingUsingSDK,
+        "isHiddenEditProfile": isHiddenEditProfile,
+        "allowAddNewContact": allowAddNewContact,
+        "allowEditContact": allowEditContact,
+        "isVideoCallEnable": isVideoCallEnable,
+        "isVoiceCallEnable": isVoiceCallEnable,
+        "isHiddenSecretChat": isHiddenSecretChat,
+        "isSyncDataInApp": isSyncDataInApp,
+        "allowReferralCode": allowReferralCode,
+        "searchByLike": searchByLike,
+        "allowReplaceCountrycode": allowReplaceCountrycode,
+        "isSyncContactInApp": isSyncContactInApp,
       };
 }
