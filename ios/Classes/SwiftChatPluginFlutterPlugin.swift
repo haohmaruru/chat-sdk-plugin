@@ -42,7 +42,7 @@ public class SwiftChatPluginFlutterPlugin: NSObject, FlutterPlugin {
         let iosConfig = argsConfig["iosConfig"] as! [String: Any]
         
         let config = NetaloConfiguration(
-            enviroment: .development,
+            enviroment: .testing,
             appId: argsConfig["appId"] as! Int64,
             appKey: argsConfig["appKey"] as! String,
             accountKey: argsConfig["accountKey"] as! String,
@@ -95,13 +95,27 @@ public class SwiftChatPluginFlutterPlugin: NSObject, FlutterPlugin {
     
     private func openChatConversation(){
         print("openChatConversation IOS")
-        //        self.netAloSDK.showListGroup { err in
-        //
-        //        }
+        self.netAloSDK.showListGroup { err in
+            
+        }
     }
     
     private func setUser(call: FlutterMethodCall,result: @escaping FlutterResult){
-        print("setUser IOS")
+        guard let args = call.arguments else {
+            return
+        }
+        let argsUser = args as! [String: Any]
+        let user = NetAloUserHolder(id: argsUser["id"] as? Int64 ?? 0,
+                                    phoneNumber:argsUser["phone"] as? String ?? "",
+                                    email: "",
+                                    fullName: argsUser["username"] as? String ?? "",
+                                    avatarUrl: argsUser["avatar"] as? String ?? "",
+                                    session: argsUser["token"] as? String ?? "")
+        do {
+            try self.netAloSDK.set(user: user)
+        } catch let e {
+            print("Error \(e)")
+        }
     }
     
     private func openChatWithAnother(call: FlutterMethodCall,result: @escaping FlutterResult){

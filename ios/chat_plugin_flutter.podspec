@@ -27,9 +27,12 @@ A new Flutter plugin project.
   # chat sdk
   s.dependency 'NetacomSDKs','0.1.2'
   s.dependency 'NotificationSDK', '0.1.2'
+  s.dependency 'WebRTC'
+  s.dependency 'Resolver'
+  s.dependency 'MessageKit'
 
-   s.preserve_paths = 'sdk/WebRTC.xcframework', 'sdk/Resolver.xcframework', 'sdk/MessageKit.xcframework', 'sdk/InputBarAccessoryView.xcframework'
-   s.xcconfig = { 'OTHER_LDFLAGS' => '-framework WebRTC -framework Resolver -framework MessageKit -framework InputBarAccessoryView' }
-   s.vendored_frameworks = 'sdk/WebRTC.xcframework', 'sdk/Resolver.xcframework', 'sdk/MessageKit.xcframework', 'sdk/InputBarAccessoryView.xcframework'
+#   s.preserve_paths = 'sdk/WebRTC.xcframework', 'sdk/Resolver.xcframework', 'sdk/MessageKit.xcframework', 'sdk/InputBarAccessoryView.xcframework'
+#   s.xcconfig = { 'OTHER_LDFLAGS' => '-framework WebRTC -framework Resolver -framework MessageKit -framework InputBarAccessoryView' }
+#   s.vendored_frameworks = 'sdk/WebRTC.xcframework', 'sdk/Resolver.xcframework', 'sdk/MessageKit.xcframework', 'sdk/InputBarAccessoryView.xcframework'
 #   s.resource_bundle = { 'WebRTC-Resources' => './*' }
 end

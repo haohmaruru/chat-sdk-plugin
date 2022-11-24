@@ -11,9 +11,9 @@ project 'Runner', {
     'Release' => :release,
 }
 #pod 'WebRTC-lib'
-#pod 'WebRTC', :git => 'https://github.com/Netacom-NetAlo/WebRTC-iOS', branch: 'main'
-#pod 'Resolver', :git => 'https://github.com/Netacom-NetAlo/Resolver-iOS', branch: 'main'
-#pod 'MessageKit', :git => 'https://github.com/Netacom-NetAlo/Messagekit-iOS'
+pod 'WebRTC', :git => 'https://github.com/Netacom-NetAlo/WebRTC-iOS', branch: 'main'
+pod 'Resolver', :git => 'https://github.com/Netacom-NetAlo/Resolver-iOS', branch: 'main'
+pod 'MessageKit', :git => 'https://github.com/Netacom-NetAlo/Messagekit-iOS'
 
 def flutter_root
     generated_xcode_build_settings_path = File.expand_path(File.join('..', 'Flutter', 'Generated.xcconfig'), __FILE__)
