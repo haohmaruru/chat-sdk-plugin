@@ -103,6 +103,7 @@ class AndroidSetting {
 
 class IosConfig {
   String? appGroupIdentifier;
+  String? storeUrl;
   bool? forceUpdateProfile;
   bool? allowCustomUsername;
   bool? allowCustomProfile;
@@ -125,7 +126,8 @@ class IosConfig {
   bool? allowReplaceCountrycode;
   bool? isSyncContactInApp;
   IosConfig({
-    this.appGroupIdentifier,
+    this.appGroupIdentifier = "",
+    this.storeUrl = "",
     this.forceUpdateProfile = true,
     this.allowCustomUsername = true,
     this.allowCustomProfile = true,
@@ -149,6 +151,7 @@ class IosConfig {
   });
   Map<String, dynamic> toJson() => {
         "appGroupIdentifier": appGroupIdentifier,
+        "storeUrl": storeUrl,
         "forceUpdateProfile": forceUpdateProfile,
         "allowCustomUsername": allowCustomUsername,
         "allowCustomProfile": allowCustomProfile,

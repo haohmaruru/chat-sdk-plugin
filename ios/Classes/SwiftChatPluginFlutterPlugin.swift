@@ -9,7 +9,6 @@ import RxSwift
 import NADomain
 
 public class SwiftChatPluginFlutterPlugin: NSObject, FlutterPlugin {
-    private lazy var mainWindow = UIWindow(frame: UIScreen.main.bounds)
     private var netAloSDK: NetAloFullManager!
     private var disposeBag = DisposeBag()
     
@@ -36,39 +35,45 @@ public class SwiftChatPluginFlutterPlugin: NSObject, FlutterPlugin {
     private func initChatSDK(call: FlutterMethodCall, result: @escaping FlutterResult){
         print("initChatSDK IOS")
         
-        var config = NetaloConfiguration(
+        guard let args = call.arguments else {
+            return
+        }
+        let argsConfig = args as! [String: Any]
+        let iosConfig = argsConfig["iosConfig"] as! [String: Any]
+        
+        let config = NetaloConfiguration(
             enviroment: .development,
-            appId: 1,
-            appKey: "appKey",
-            accountKey: "adminkey",
-            appGroupIdentifier: "group.vn.netacom.hura",
-            storeUrl: URL(string: "https://apps.apple.com/vn/app/vndirect/id1594533471")!,
+            appId: argsConfig["appId"] as! Int64,
+            appKey: argsConfig["appKey"] as! String,
+            accountKey: argsConfig["accountKey"] as! String,
+            appGroupIdentifier: iosConfig["appGroupIdentifier"] as? String ?? "",
+            storeUrl: URL(string: iosConfig["storeUrl"] as? String ?? "https://apps.apple.com")!,
             analytics: [],
             featureConfig: FeatureConfig(
                 user: FeatureConfig.UserConfig(
-                    forceUpdateProfile: true,
-                    allowCustomUsername: true,
-                    allowCustomProfile: true,
-                    allowCustomAlert: true,
-                    allowAddContact: true,
-                    allowBlockContact: true,
-                    allowSetUserProfileUrl: true,
-                    allowEnableLocationFeature: true,
-                    allowTrackingUsingSDK: true,
-                    isHiddenEditProfile: true,
-                    allowAddNewContact: true,
-                    allowEditContact: true
+                    forceUpdateProfile: iosConfig["forceUpdateProfile"] as? Bool ?? true,
+                    allowCustomUsername: iosConfig["allowCustomUsername"] as? Bool ?? true,
+                    allowCustomProfile: iosConfig["allowCustomProfile"] as? Bool ?? true,
+                    allowCustomAlert: iosConfig["allowCustomAlert"] as? Bool ?? true,
+                    allowAddContact: iosConfig["allowAddContact"] as? Bool ?? true,
+                    allowBlockContact: iosConfig["allowBlockContact"] as? Bool ?? true,
+                    allowSetUserProfileUrl: iosConfig["allowSetUserProfileUrl"] as? Bool ?? true,
+                    allowEnableLocationFeature: iosConfig["allowEnableLocationFeature"] as? Bool ?? true,
+                    allowTrackingUsingSDK: iosConfig["allowTrackingUsingSDK"] as? Bool ?? true,
+                    isHiddenEditProfile: iosConfig["isHiddenEditProfile"] as? Bool ?? true,
+                    allowAddNewContact: iosConfig["allowAddNewContact"] as? Bool ?? true,
+                    allowEditContact: iosConfig["allowEditContact"] as? Bool ?? true
                 ),
                 chat: FeatureConfig.ChatConfig(
-                    isVideoCallEnable: true,
-                    isVoiceCallEnable: true,
-                    isHiddenSecretChat: true
+                    isVideoCallEnable: iosConfig["isVideoCallEnable"] as? Bool ?? true,
+                    isVoiceCallEnable: iosConfig["isVoiceCallEnable"] as? Bool ?? true,
+                    isHiddenSecretChat: iosConfig["isHiddenSecretChat"] as? Bool ?? true
                 ),
-                isSyncDataInApp: true,
-                allowReferralCode: false,
-                searchByLike: true,
-                allowReplaceCountrycode: false,
-                isSyncContactInApp: true
+                isSyncDataInApp: iosConfig["isSyncDataInApp"] as? Bool ?? true,
+                allowReferralCode: iosConfig["allowReferralCode"] as? Bool ?? false,
+                searchByLike: iosConfig["searchByLike"] as? Bool ?? true,
+                allowReplaceCountrycode: iosConfig["allowReplaceCountrycode"] as? Bool ?? false,
+                isSyncContactInApp: iosConfig["isSyncContactInApp"] as? Bool ?? true
             ),
             permissions:  [SDKPermissionSet.microPhone]
         )

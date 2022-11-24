@@ -28,7 +28,7 @@ A new Flutter plugin project.
   s.dependency 'NetacomSDKs','0.1.2'
   s.dependency 'NotificationSDK', '0.1.2'
 
-   s.preserve_paths = 'WebRTC.xcframework', 'Resolver.xcframework', 'MessageKit.xcframework', 'InputBarAccessoryView.xcframework'
+   s.preserve_paths = 'sdk/WebRTC.xcframework', 'sdk/Resolver.xcframework', 'sdk/MessageKit.xcframework', 'sdk/InputBarAccessoryView.xcframework'
    s.xcconfig = { 'OTHER_LDFLAGS' => '-framework WebRTC -framework Resolver -framework MessageKit -framework InputBarAccessoryView' }
    s.vendored_frameworks = 'sdk/WebRTC.xcframework', 'sdk/Resolver.xcframework', 'sdk/MessageKit.xcframework', 'sdk/InputBarAccessoryView.xcframework'
 #   s.resource_bundle = { 'WebRTC-Resources' => './*' }

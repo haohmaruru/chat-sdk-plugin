@@ -20,10 +20,10 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   String _platformVersion = 'Unknown';
   final HuraConfig config = HuraConfig(
-    appId: 1,
-    appKey: "appKey",
-    accountKey: "adminkey",
-  );
+      appId: 1,
+      appKey: "appKey",
+      accountKey: "adminkey",
+      iosConfig: IosConfig(storeUrl: "https://apps.apple.com"));
   late final ChatPluginFlutter _huraChatFlutterPlugin =
       ChatPluginFlutter(config);
 
