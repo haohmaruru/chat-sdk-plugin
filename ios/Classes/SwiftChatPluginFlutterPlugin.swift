@@ -9,31 +9,42 @@ import RxSwift
 import NADomain
 
 public class SwiftChatPluginFlutterPlugin: NSObject, FlutterPlugin {
-    private var netAloSDK: NetAloFullManager!
+    private var netAloSDK: NetAloFullManager?
     private var disposeBag = DisposeBag()
+    public static let instance = SwiftChatPluginFlutterPlugin()
+    
+    var initChatListener: CompletionType? = nil
     
     public static func register(with registrar: FlutterPluginRegistrar) {
         let channel = FlutterMethodChannel(name: "chat_plugin_flutter", binaryMessenger: registrar.messenger())
-        let instance = SwiftChatPluginFlutterPlugin()
+        //        let instance = SwiftChatPluginFlutterPlugin()
         registrar.addMethodCallDelegate(instance, channel: channel)
+    }
+    
+    public func setOnInitChatConfigListener(initChatListener: @escaping CompletionType){
+        self.initChatListener = initChatListener
     }
     
     public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
         switch (call.method) {
         case "initChatSDK" :
             initChatSDK(call:call,result: result)
+            break
         case "openChatConversation":
             openChatConversation()
+            break
         case "setUser" :
             setUser(call:call,result: result)
+            break
         case "openChatWithAnother":
             openChatWithAnother(call:call,result: result)
+            break
         default: result(FlutterMethodNotImplemented)
+            break
         }
     }
     
-    private func initChatSDK(call: FlutterMethodCall, result: @escaping FlutterResult){
-        print("initChatSDK IOS")
+    private func initChatSDK( call: FlutterMethodCall, result: @escaping FlutterResult){
         
         guard let args = call.arguments else {
             return
@@ -42,7 +53,7 @@ public class SwiftChatPluginFlutterPlugin: NSObject, FlutterPlugin {
         let iosConfig = argsConfig["iosConfig"] as! [String: Any]
         
         let config = NetaloConfiguration(
-            enviroment: .testing,
+            enviroment: .production,
             appId: argsConfig["appId"] as! Int64,
             appKey: argsConfig["appKey"] as! String,
             accountKey: argsConfig["accountKey"] as! String,
@@ -61,8 +72,8 @@ public class SwiftChatPluginFlutterPlugin: NSObject, FlutterPlugin {
                     allowEnableLocationFeature: iosConfig["allowEnableLocationFeature"] as? Bool ?? true,
                     allowTrackingUsingSDK: iosConfig["allowTrackingUsingSDK"] as? Bool ?? true,
                     isHiddenEditProfile: iosConfig["isHiddenEditProfile"] as? Bool ?? true,
-                    allowAddNewContact: iosConfig["allowAddNewContact"] as? Bool ?? true,
-                    allowEditContact: iosConfig["allowEditContact"] as? Bool ?? true
+                    allowAddNewContact: iosConfig["allowAddNewContact"] as? Bool ?? true
+                    //                    allowEditContact: iosConfig["allowEditContact"] as? Bool ?? true
                 ),
                 chat: FeatureConfig.ChatConfig(
                     isVideoCallEnable: iosConfig["isVideoCallEnable"] as? Bool ?? true,
@@ -80,22 +91,23 @@ public class SwiftChatPluginFlutterPlugin: NSObject, FlutterPlugin {
         
         self.netAloSDK = NetAloFullManager(config: config)
         
-        self.netAloSDK
+        self.netAloSDK?
             .start()
             .timeout(.seconds(10), scheduler: MainScheduler.instance)
             .catchAndReturn(())
             .observe(on: MainScheduler.instance)
             .withUnretained(self)
             .do { owner, _ in
-                owner.netAloSDK.buildSDKModule()
+                owner.netAloSDK?.buildSDKModule()
             }
             .subscribe()
             .disposed(by: self.disposeBag)
+        
+        self.initChatListener?()
     }
     
     private func openChatConversation(){
-        print("openChatConversation IOS")
-        self.netAloSDK.showListGroup { err in
+        self.netAloSDK?.showListGroup { err in
             
         }
     }
@@ -112,13 +124,84 @@ public class SwiftChatPluginFlutterPlugin: NSObject, FlutterPlugin {
                                     avatarUrl: argsUser["avatar"] as? String ?? "",
                                     session: argsUser["token"] as? String ?? "")
         do {
-            try self.netAloSDK.set(user: user)
+            try self.netAloSDK?.set(user: user)
         } catch let e {
             print("Error \(e)")
         }
     }
     
     private func openChatWithAnother(call: FlutterMethodCall,result: @escaping FlutterResult){
-        print("openChatWithAnother IOS")
+        
+        guard let args = call.arguments else {
+            return
+        }
+        let argsUser = args as! [String: Any]
+        let contact = NAContact(id: argsUser["id"] as? Int64 ?? 0,
+                                phone: argsUser["phone"] as? String ?? "",
+                                fullName: argsUser["username"] as? String ?? "",
+                                profileUrl: argsUser["avatar"] as? String ?? "")
+        do {
+            self.netAloSDK?.showChat(with: contact) { err in
+                result(true)
+            }
+        } catch let e {
+            print("Error \(e)")
+        }
+        
+        
+    }
+    
+    public func application(
+        _ application: UIApplication,
+        didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
+    ) -> Bool{
+        return self.netAloSDK?.application(application, didFinishLaunchingWithOptions: launchOptions) ?? true
+    }
+    
+    // MARK: - AppDelegateViewModelOutputs
+    
+    public func applicationDidBecomeActive(_ application: UIApplication) {
+        self.netAloSDK?.applicationDidBecomeActive(application)
+    }
+    
+    public func applicationWillResignActive(_ application: UIApplication) {
+        self.netAloSDK?.applicationWillResignActive(application)
+    }
+    
+    public func applicationWillTerminate(_ application: UIApplication) {
+        self.netAloSDK?.applicationWillTerminate(application)
+    }
+    
+    // UserActivity
+    public func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
+        self.netAloSDK?.application(application, continue: userActivity, restorationHandler: restorationHandler) ?? true
+    }
+    
+    // Notification methods
+    public func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        self.netAloSDK?.application(application, didRegisterForRemoteNotificationsWithDeviceToken: deviceToken)
+    }
+    
+    public func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+        self.netAloSDK?.application(application, open: url, sourceApplication: sourceApplication, annotation: application) ?? true
+    }
+    
+    public func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        self.netAloSDK?.application(app, open: url, options: options) ?? true
+    }
+    
+    // MARK: - UNUserNotificationCenterDelegate
+    public func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        self.netAloSDK?.userNotificationCenter(center, willPresent: notification, withCompletionHandler: completionHandler)
+    }
+    
+    public func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        self.netAloSDK?.userNotificationCenter(center, didReceive: response, withCompletionHandler: completionHandler)
     }
 }
+
+public protocol OnInitChatConfigListener {
+    func initSuccess()
+}
+
+public typealias CompletionType = () -> ()

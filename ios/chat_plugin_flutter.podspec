@@ -26,7 +26,7 @@ A new Flutter plugin project.
   
   # chat sdk
   s.dependency 'NetacomSDKs','0.1.2'
-  s.dependency 'NotificationSDK', '0.1.2'
+  s.dependency 'NotificationSDK','0.1.2'
   s.dependency 'WebRTC'
   s.dependency 'Resolver'
   s.dependency 'MessageKit'

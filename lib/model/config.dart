@@ -116,7 +116,7 @@ class IosConfig {
   bool? allowTrackingUsingSDK;
   bool? isHiddenEditProfile;
   bool? allowAddNewContact;
-  bool? allowEditContact;
+  // bool? allowEditContact;
   bool? isVideoCallEnable;
   bool? isVoiceCallEnable;
   bool? isHiddenSecretChat;
@@ -139,7 +139,7 @@ class IosConfig {
     this.allowTrackingUsingSDK = true,
     this.isHiddenEditProfile = true,
     this.allowAddNewContact = true,
-    this.allowEditContact = true,
+    // this.allowEditContact = true,
     this.isVideoCallEnable = true,
     this.isVoiceCallEnable = true,
     this.isHiddenSecretChat = true,
@@ -163,7 +163,7 @@ class IosConfig {
         "allowTrackingUsingSDK": allowTrackingUsingSDK,
         "isHiddenEditProfile": isHiddenEditProfile,
         "allowAddNewContact": allowAddNewContact,
-        "allowEditContact": allowEditContact,
+        // "allowEditContact": allowEditContact,
         "isVideoCallEnable": isVideoCallEnable,
         "isVoiceCallEnable": isVoiceCallEnable,
         "isHiddenSecretChat": isHiddenSecretChat,

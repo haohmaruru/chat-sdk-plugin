@@ -20,17 +20,22 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   String _platformVersion = 'Unknown';
   final HuraConfig config = HuraConfig(
-      appId: 1,
-      appKey: "appKey",
-      accountKey: "adminkey",
-      iosConfig: IosConfig(storeUrl: "https://apps.apple.com"));
+    appId: 17,
+    appKey: "B2D89AC8B8ECF",
+    accountKey: "adminkey",
+    iosConfig: IosConfig(
+      storeUrl: "https://apps.apple.com/vn/app/vndirect/id1594533471",
+      appGroupIdentifier: "group.vn.com.vndirect.stockchat",
+    ),
+  );
   late final ChatPluginFlutter _huraChatFlutterPlugin =
       ChatPluginFlutter(config);
 
   final user = ChatUser(
-      id: 281474976981364,
-      username: "Toan 0000",
-      token: "0409ae9d38d088be45dab6e598229f21eb2c9CXW");
+      id: 4785074606697392,
+      username: "son1990",
+      phone: "+84101000899",
+      token: "0975295ac599d56c4129bdce1f5985bba994287X");
 
   @override
   void initState() {
@@ -45,7 +50,6 @@ class _MyAppState extends State<MyApp> {
     // We also handle the message potentially returning null.
     try {
       _huraChatFlutterPlugin.initChatSDK();
-
       _huraChatFlutterPlugin.setUser(user);
     } on PlatformException {
       platformVersion = 'Failed to get platform version.';
@@ -69,8 +73,20 @@ class _MyAppState extends State<MyApp> {
               TextButton(
                 onPressed: () {
                   // _huraChatFlutterPlugin.setUser(user);
-                  _huraChatFlutterPlugin
-                      .openChatWithAnother(ChatUser(id: 2814749772693227));
+                  _huraChatFlutterPlugin.setUser(user);
+                },
+                child: Text(
+                  "****set user***",
+                ),
+              ),
+              SizedBox(
+                height: 30,
+              ),
+              TextButton(
+                onPressed: () {
+                  // _huraChatFlutterPlugin.setUser(user);
+                  _huraChatFlutterPlugin.openChatWithAnother(
+                      ChatUser(id: 4785074605935470, username: "Test123"));
                 },
                 child: Text(
                   "chat with user",
