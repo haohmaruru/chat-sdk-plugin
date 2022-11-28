@@ -1,6 +1,6 @@
 name: chat_plugin_flutter
 description: A Chat Sdk flutter support for Android and Ios.
-version: 1.0.0
+version: 1.0.1
 homepage: https://github.com/haohmaruru/chat-sdk-plugin
 
 environment:
