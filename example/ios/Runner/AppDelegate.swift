@@ -52,4 +52,17 @@ import chat_plugin_flutter
     }
     
     //  end sdk chat
+    
+    //  notification
+    //  start sdk chat
+    // MARK: - UNUserNotificationCenterDelegate
+    public override func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        SwiftChatPluginFlutterPlugin.instance.userNotificationCenter(center, willPresent: notification, withCompletionHandler: completionHandler)
+    }
+    
+    public override func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        SwiftChatPluginFlutterPlugin.instance.userNotificationCenter(center, didReceive: response, withCompletionHandler: completionHandler)
+    }
+    
+    //  end sdk chat
 }

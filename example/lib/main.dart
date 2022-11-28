@@ -19,23 +19,46 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   String _platformVersion = 'Unknown';
+
+  late final ChatPluginFlutter _huraChatFlutterPlugin =
+      ChatPluginFlutter(config);
+// Dapp
+//   final HuraConfig config = HuraConfig(
+//     appId: 17,
+//     appKey: "B2D89AC8B8ECF",
+//     accountKey: "adminkey",
+//     iosConfig: IosConfig(
+//       storeUrl: "https://apps.apple.com/vn/app/vndirect/id1594533471",
+//       appGroupIdentifier: "group.vn.com.vndirect.stockchat",
+//     ),
+//   );
+//
+//   final user = ChatUser(
+//       id: 4785074606697392,
+//       username: "son1990",
+//       phone: "+84101000899",
+//       token: "0975295ac599d56c4129bdce1f5985bba994287X");
+//
+//   final userAnother = ChatUser(id: 4785074605935470, username: "Test123");
+
+  // hura
   final HuraConfig config = HuraConfig(
-    appId: 17,
-    appKey: "B2D89AC8B8ECF",
+    appId: 1,
+    appKey: "appKey",
     accountKey: "adminkey",
     iosConfig: IosConfig(
       storeUrl: "https://apps.apple.com/vn/app/vndirect/id1594533471",
-      appGroupIdentifier: "group.vn.com.vndirect.stockchat",
+      appGroupIdentifier: "group.hura.asia",
     ),
   );
-  late final ChatPluginFlutter _huraChatFlutterPlugin =
-      ChatPluginFlutter(config);
 
   final user = ChatUser(
-      id: 4785074606697392,
-      username: "son1990",
-      phone: "+84101000899",
-      token: "0975295ac599d56c4129bdce1f5985bba994287X");
+      id: 2814749772802146,
+      username: "+84101000000",
+      phone: "+84101000000",
+      token: "0985beed219fe36442c0885a82a52630ec34993H");
+
+  final userAnother = ChatUser(id: 2814749772645824, username: "0101111111");
 
   @override
   void initState() {
@@ -50,7 +73,7 @@ class _MyAppState extends State<MyApp> {
     // We also handle the message potentially returning null.
     try {
       _huraChatFlutterPlugin.initChatSDK();
-      _huraChatFlutterPlugin.setUser(user);
+      // _huraChatFlutterPlugin.setUser(user);
     } on PlatformException {
       platformVersion = 'Failed to get platform version.';
     }
@@ -85,8 +108,7 @@ class _MyAppState extends State<MyApp> {
               TextButton(
                 onPressed: () {
                   // _huraChatFlutterPlugin.setUser(user);
-                  _huraChatFlutterPlugin.openChatWithAnother(
-                      ChatUser(id: 4785074605935470, username: "Test123"));
+                  _huraChatFlutterPlugin.openChatWithAnother(userAnother);
                 },
                 child: Text(
                   "chat with user",

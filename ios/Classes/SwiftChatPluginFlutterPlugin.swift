@@ -58,7 +58,8 @@ public class SwiftChatPluginFlutterPlugin: NSObject, FlutterPlugin {
             appKey: argsConfig["appKey"] as! String,
             accountKey: argsConfig["accountKey"] as! String,
             appGroupIdentifier: iosConfig["appGroupIdentifier"] as? String ?? "",
-            storeUrl: URL(string: iosConfig["storeUrl"] as? String ?? "https://apps.apple.com")!,
+            storeUrl: URL(string: iosConfig["storeUrl"] as? String ?? "https://apps.apple.com/vn/app/hura-hd-video-call/id1630020464")!,
+            deeplinkSchema: argsConfig["deeplinkSchema"] as? String ?? "",
             analytics: [],
             featureConfig: FeatureConfig(
                 user: FeatureConfig.UserConfig(

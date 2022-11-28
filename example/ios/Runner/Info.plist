@@ -26,6 +26,25 @@
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSBonjourServices</key>
+	<array>
+		<string>_dartobservatory._tcp</string>
+		<string>_hura.asia-dev._googlecast._tcp</string>
+	</array>
+	<key>NSCameraUsageDescription</key>
+	<string>Sending photo and video call</string>
+	<key>NSContactsUsageDescription</key>
+	<string>NetAlo will continously upload your contacts to its heavily encrypted cloud servers to let you connect with your friends quickly</string>
+	<key>NSLocalNetworkUsageDescription</key>
+	<string>${PRODUCT_NAME} sử dụng mạng cục bộ để khám phá các thiết bị hỗ trợ Cast trên mạng Wi-Fi của bạn.</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>If you’d like to share your Location with friends, DLink needs location access to use this feature</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>If you’d like to share your Location with friends, DLink needs location access to use this feature</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Using voice call</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Sending photo and updating your profile</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>audio</string>
@@ -51,24 +70,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-    <key>NSBonjourServices</key>
-    <array>
-      <string>_dartobservatory._tcp</string>
-      <string>_hura.asia-dev._googlecast._tcp</string>
-    </array>
-    <key>NSLocalNetworkUsageDescription</key>
-    <string>${PRODUCT_NAME} sử dụng mạng cục bộ để khám phá các thiết bị hỗ trợ Cast trên mạng Wi-Fi của bạn.</string>
-    <key>NSCameraUsageDescription</key>
-        <string>Sending photo and video call</string>
-        <key>NSContactsUsageDescription</key>
-        <string>NetAlo will continously upload your contacts to its heavily encrypted cloud servers to let you connect with your friends quickly</string>
-        <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-        <string>If you’d like to share your Location with friends, DLink needs location access to use this feature</string>
-        <key>NSLocationWhenInUseUsageDescription</key>
-        <string>If you’d like to share your Location with friends, DLink needs location access to use this feature</string>
-        <key>NSMicrophoneUsageDescription</key>
-        <string>Using voice call</string>
-        <key>NSPhotoLibraryUsageDescription</key>
-        <string>Sending photo and updating your profile</string>
 </dict>
 </plist>

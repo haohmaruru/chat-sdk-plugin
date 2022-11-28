@@ -1,4 +1,4 @@
-package vn.asia.chat_plugin_flutter_example
+package com.asia.hura
 
 import io.flutter.embedding.android.FlutterActivity
 

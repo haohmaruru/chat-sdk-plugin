@@ -52,10 +52,10 @@ android {
 
 dependencies {
     ext {
-        sdkNetAlo_version = '1.0.0'
+        sdkNetAlo_version = '1.0.1'
     }
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
-    implementation "vn.netacom.chatSDK:ChatSDKUI-Dev:$sdkNetAlo_version"
+    implementation "vn.chat-sdk:chat:$sdkNetAlo_version"
 }
