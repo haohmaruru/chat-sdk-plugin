@@ -12,17 +12,13 @@ public class SwiftChatPluginFlutterPlugin: NSObject, FlutterPlugin {
     private var netAloSDK: NetAloFullManager?
     private var disposeBag = DisposeBag()
     public static let instance = SwiftChatPluginFlutterPlugin()
-    
-    var initChatListener: CompletionType? = nil
+        
+    let subject = PublishSubject<String>()
     
     public static func register(with registrar: FlutterPluginRegistrar) {
         let channel = FlutterMethodChannel(name: "chat_plugin_flutter", binaryMessenger: registrar.messenger())
         //        let instance = SwiftChatPluginFlutterPlugin()
         registrar.addMethodCallDelegate(instance, channel: channel)
-    }
-    
-    public func setOnInitChatConfigListener(initChatListener: @escaping CompletionType){
-        self.initChatListener = initChatListener
     }
     
     public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
@@ -104,7 +100,8 @@ public class SwiftChatPluginFlutterPlugin: NSObject, FlutterPlugin {
             .subscribe()
             .disposed(by: self.disposeBag)
         
-        self.initChatListener?()
+        //self.initChatListener?()
+        self.subject.onNext("1")
     }
     
     private func openChatConversation(){
@@ -156,7 +153,10 @@ public class SwiftChatPluginFlutterPlugin: NSObject, FlutterPlugin {
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool{
-        return self.netAloSDK?.application(application, didFinishLaunchingWithOptions: launchOptions) ?? true
+        self.subject.subscribe(onNext: { string in
+            self.netAloSDK?.application(application, didFinishLaunchingWithOptions: launchOptions)
+        })
+        return true
     }
     
     // MARK: - AppDelegateViewModelOutputs
@@ -180,7 +180,9 @@ public class SwiftChatPluginFlutterPlugin: NSObject, FlutterPlugin {
     
     // Notification methods
     public func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        self.netAloSDK?.application(application, didRegisterForRemoteNotificationsWithDeviceToken: deviceToken)
+        self.subject.subscribe(onNext: { string in
+            self.netAloSDK?.application(application, didRegisterForRemoteNotificationsWithDeviceToken: deviceToken)
+        })
     }
     
     public func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
@@ -193,6 +195,7 @@ public class SwiftChatPluginFlutterPlugin: NSObject, FlutterPlugin {
     
     // MARK: - UNUserNotificationCenterDelegate
     public func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+            
         self.netAloSDK?.userNotificationCenter(center, willPresent: notification, withCompletionHandler: completionHandler)
     }
     
@@ -200,9 +203,3 @@ public class SwiftChatPluginFlutterPlugin: NSObject, FlutterPlugin {
         self.netAloSDK?.userNotificationCenter(center, didReceive: response, withCompletionHandler: completionHandler)
     }
 }
-
-public protocol OnInitChatConfigListener {
-    func initSuccess()
-}
-
-public typealias CompletionType = () -> ()

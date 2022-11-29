@@ -1,5 +1,6 @@
 import UIKit
 import Flutter
+import Firebase
 import chat_plugin_flutter
 
 @UIApplicationMain
@@ -8,17 +9,40 @@ import chat_plugin_flutter
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
+        FirebaseApp.configure()
+        
         GeneratedPluginRegistrant.register(with: self)
         
-        //   start sdk chat
-        SwiftChatPluginFlutterPlugin.instance.setOnInitChatConfigListener {
-            let _ = SwiftChatPluginFlutterPlugin.instance.application(application, didFinishLaunchingWithOptions: launchOptions)
-            print("AppDelegate initChatListener")
-        }
-        //  end sdk chat
+        self.registerForRemoteNotification()
         
+        if #available(iOS 10.0, *) {
+            UNUserNotificationCenter.current().delegate = self
+        }
+    
+        
+        //   start sdk chat
+        SwiftChatPluginFlutterPlugin.instance.application(application, didFinishLaunchingWithOptions: launchOptions)
+        //  end sdk chat
+
         return super.application(application, didFinishLaunchingWithOptions: launchOptions)
     }
+    
+    private func registerForRemoteNotification() {
+            if #available(iOS 10.0, *) {
+                let center  = UNUserNotificationCenter.current()
+
+                center.requestAuthorization(options: [.sound, .alert, .badge]) { (granted, error) in
+                    if error == nil{
+                        UIApplication.shared.registerForRemoteNotifications()
+                    }
+                }
+
+            }
+            else {
+                UIApplication.shared.registerUserNotificationSettings(UIUserNotificationSettings(types: [.sound, .alert, .badge], categories: nil))
+                UIApplication.shared.registerForRemoteNotifications()
+            }
+        }
     
     //   start sdk chat
     public override func applicationDidBecomeActive(_ application: UIApplication) {
@@ -40,7 +64,18 @@ import chat_plugin_flutter
     
     // Notification methods
     public override func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        UserDefaults.standard.setValue(deviceToken, forKey: "deviceToken")
+        Messaging.messaging().apnsToken = deviceToken
+        
         SwiftChatPluginFlutterPlugin.instance.application(application, didRegisterForRemoteNotificationsWithDeviceToken: deviceToken)
+        
+        let tokenParts = deviceToken.map { data -> String in
+                return String(format: "%02.2hhx", data)
+            }
+                
+            let token = tokenParts.joined()
+        print("AppDelegate deviceToken: \(token)")
+        
     }
     
     override func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
@@ -57,6 +92,7 @@ import chat_plugin_flutter
     //  start sdk chat
     // MARK: - UNUserNotificationCenterDelegate
     public override func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+//        completionHandler([.alert, .badge, .sound])
         SwiftChatPluginFlutterPlugin.instance.userNotificationCenter(center, willPresent: notification, withCompletionHandler: completionHandler)
     }
     

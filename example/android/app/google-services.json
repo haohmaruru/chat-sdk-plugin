@@ -1,0 +1,186 @@
+{
+  "project_info": {
+    "project_number": "224630588138",
+    "project_id": "hura-4cf51",
+    "storage_bucket": "hura-4cf51.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:224630588138:android:a937c574e0527fc7988d93",
+        "android_client_info": {
+          "package_name": "com.asia.hura"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "224630588138-3291nfnfc4cpdvhr5j7hcn79apmiptgc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.asia.hura",
+            "certificate_hash": "d01a2e1fed27ba2fc3a8fb49748477ce57e2b94f"
+          }
+        },
+        {
+          "client_id": "224630588138-93dlsh1shjk9997311j47i7ej3m3nb4d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.asia.hura",
+            "certificate_hash": "08ec258508b46ff9c4c4c792fe23f04b7c4a996e"
+          }
+        },
+        {
+          "client_id": "224630588138-kk38qbrduu2vhh16kv901qd7o3rggq6o.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.asia.hura",
+            "certificate_hash": "b1d4344077221a125da0c144d4dcc4c732c51996"
+          }
+        },
+        {
+          "client_id": "224630588138-8btk8vkh4v1gs8bnspur4cv7qr6bshis.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD5KENDzYc6LX8emj48UYeS7aZcDtcIQyM"
+        },
+        {
+          "current_key": "AIzaSyD6pSDzOYOWKrTdoO1NfgNgVTVV4b0GDAE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "224630588138-8btk8vkh4v1gs8bnspur4cv7qr6bshis.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "224630588138-cb5cbkboskhvbqr11oumqj0mmjq7io71.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "hura.asia",
+                "app_store_id": "630020464"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:224630588138:android:bda5518fd76f27fd988d93",
+        "android_client_info": {
+          "package_name": "com.asia.hura.dev"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "224630588138-0c63ffc7r1rhvr9bhi3r181ku3p64i7u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.asia.hura.dev",
+            "certificate_hash": "08ec258508b46ff9c4c4c792fe23f04b7c4a996e"
+          }
+        },
+        {
+          "client_id": "224630588138-usc0vrvtc5eqrdcg12kskf02fvi52c6u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.asia.hura.dev",
+            "certificate_hash": "d01a2e1fed27ba2fc3a8fb49748477ce57e2b94f"
+          }
+        },
+        {
+          "client_id": "224630588138-8btk8vkh4v1gs8bnspur4cv7qr6bshis.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD5KENDzYc6LX8emj48UYeS7aZcDtcIQyM"
+        },
+        {
+          "current_key": "AIzaSyD6pSDzOYOWKrTdoO1NfgNgVTVV4b0GDAE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "224630588138-8btk8vkh4v1gs8bnspur4cv7qr6bshis.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "224630588138-cb5cbkboskhvbqr11oumqj0mmjq7io71.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "hura.asia",
+                "app_store_id": "630020464"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:224630588138:android:6a97afc1cfd8eb4e988d93",
+        "android_client_info": {
+          "package_name": "com.asia.hura.staging"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "224630588138-54g3u43q7vlsanv7okds8u4m462mce0m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.asia.hura.staging",
+            "certificate_hash": "08ec258508b46ff9c4c4c792fe23f04b7c4a996e"
+          }
+        },
+        {
+          "client_id": "224630588138-e2a5s8akkl7pejl8o2q861ir5927966a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.asia.hura.staging",
+            "certificate_hash": "d01a2e1fed27ba2fc3a8fb49748477ce57e2b94f"
+          }
+        },
+        {
+          "client_id": "224630588138-8btk8vkh4v1gs8bnspur4cv7qr6bshis.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD5KENDzYc6LX8emj48UYeS7aZcDtcIQyM"
+        },
+        {
+          "current_key": "AIzaSyD6pSDzOYOWKrTdoO1NfgNgVTVV4b0GDAE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "224630588138-8btk8vkh4v1gs8bnspur4cv7qr6bshis.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "224630588138-cb5cbkboskhvbqr11oumqj0mmjq7io71.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "hura.asia",
+                "app_store_id": "630020464"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
