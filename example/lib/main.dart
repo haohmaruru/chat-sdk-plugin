@@ -1,11 +1,8 @@
-import 'dart:async';
-
 import 'package:chat_plugin_flutter/chat_plugin_flutter.dart';
 import 'package:chat_plugin_flutter/model/config.dart';
 import 'package:chat_plugin_flutter/model/user.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 import 'PushNotificationManager.dart';
 
@@ -26,62 +23,30 @@ class _MyAppState extends State<MyApp> {
   String _platformVersion = 'Unknown';
 
   late final ChatPluginFlutter _chatFlutterPlugin = ChatPluginFlutter(config);
-// Dapp
-//   final HuraConfig config = HuraConfig(
-//     appId: 17,
-//     appKey: "B2D89AC8B8ECF",
-//     accountKey: "adminkey",
-//     iosConfig: IosConfig(
-//       storeUrl: "https://apps.apple.com/vn/app/vndirect/id1594533471",
-//       appGroupIdentifier: "group.vn.com.vndirect.stockchat",
-//     ),
-//   );
-//
-//   final user = ChatUser(
-//       id: 4785074606697392,
-//       username: "son1990",
-//       phone: "+84101000899",
-//       token: "0975295ac599d56c4129bdce1f5985bba994287X");
-//
-//   final userAnother = ChatUser(id: 4785074605935470, username: "Test123");
-
-  // hura
+  static const int your_app_id = 0; // must replace for your app
+  static const String your_app_key = ""; // must replace for your app
+  static const String your_account_key = ""; // must replace for your app
+  static const String your_store_url = ""; // must replace for your app
+  static const String your_app_group = ""; // must replace for your app ios
   final ChatConfig config = ChatConfig(
-      appId: 1,
-      appKey: "appKey",
-      accountKey: "adminkey",
+      appId: your_app_id,
+      appKey: your_app_key,
+      accountKey: your_account_key,
       iosConfig: IosConfig(
-        storeUrl: "https://apps.apple.com/vn/app/vndirect/id1594533471",
-        appGroupIdentifier: "group.hura.asia",
+        storeUrl: your_store_url,
+        appGroupIdentifier: your_app_group,
       ),
       androidConfig: AndroidConfig());
 
-  final user = ChatUser(
-      id: 2814749772802146,
-      username: "+84101000000",
-      phone: "+84101000000",
-      token: "0985beed219fe36442c0885a82a52630ec34993H");
+  final user = ChatUser(); // let set your user info
 
-  final userAnother = ChatUser(id: 2814749772645824, username: "0101111111");
+  final userAnother = ChatUser(); // let set your user info
 
   @override
   void initState() {
     super.initState();
     PushNotificationManager().init();
-    initPlatformState();
-  }
-
-  // Platform messages are asynchronous, so we initialize in an async method.
-  Future<void> initPlatformState() async {
-    String platformVersion;
-    // Platform messages may fail, so we use a try/catch PlatformException.
-    // We also handle the message potentially returning null.
-    try {
-      _chatFlutterPlugin.initChatSDK();
-      // _huraChatFlutterPlugin.setUser(user);
-    } on PlatformException {
-      platformVersion = 'Failed to get platform version.';
-    }
+    _chatFlutterPlugin.initChatSDK();
   }
 
   @override
@@ -94,7 +59,6 @@ class _MyAppState extends State<MyApp> {
         body: Center(
           child: Column(
             children: [
-              Text('Running on: $_platformVersion\n'),
               SizedBox(
                 height: 30,
               ),
@@ -112,7 +76,6 @@ class _MyAppState extends State<MyApp> {
               ),
               TextButton(
                 onPressed: () {
-                  // _huraChatFlutterPlugin.setUser(user);
                   _chatFlutterPlugin.openChatWithAnother(userAnother);
                 },
                 child: Text(
