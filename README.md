@@ -30,7 +30,7 @@ Create instance of plugin:
 final ChatPluginFlutter _chatFlutterPlugin = ChatPluginFlutter(config);
 ```
 
-Call method initChatSDK() be fore use:
+Call method **initChatSDK()** be fore use:
 ```flutter
 _chatFlutterPlugin.initChatSDK();
 ```
@@ -59,7 +59,7 @@ Logout:
 
 ### Ios
 
-This sdk require ios >=13.0.
+**This sdk require ios >=13.0.**
 
 Add dependencies to your **Podfile**
 
