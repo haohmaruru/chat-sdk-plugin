@@ -59,10 +59,15 @@ Logout:
 
 ### Ios
 
+This sdk require ios >=13.0.
+
 Add dependencies to your **Podfile**
 
 ```swift
 .... your dependencies ...
+
+platform :ios, '13.0'
+use_frameworks!
 
 def netalo_sdks
   pod 'NetacomSDKs', :git => 'https://github.com/Netacom-NetAlo/NetaloSDKs-iOS', tag: '10.0.1'

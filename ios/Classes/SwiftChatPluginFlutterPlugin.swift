@@ -12,7 +12,7 @@ public class SwiftChatPluginFlutterPlugin: NSObject, FlutterPlugin {
     private var netAloSDK: NetAloFullManager?
     private var disposeBag = DisposeBag()
     public static let instance = SwiftChatPluginFlutterPlugin()
-        
+    
     let subject = PublishSubject<String>()
     private var disposable:Disposable?
     
@@ -162,7 +162,9 @@ public class SwiftChatPluginFlutterPlugin: NSObject, FlutterPlugin {
         print("didFinishLaunchingWithOptions")
         self.subject.subscribe(onNext: { string in
             self.netAloSDK?.application(application, didFinishLaunchingWithOptions: launchOptions as? [UIApplication.LaunchOptionsKey: Any])
+            
         })
+            .disposed(by: self.disposeBag)
         return true
     }
     
@@ -191,7 +193,8 @@ public class SwiftChatPluginFlutterPlugin: NSObject, FlutterPlugin {
         print("didRegisterForRemoteNotificationsWithDeviceToken")
         self.subject.subscribe(onNext: { string in
             self.netAloSDK?.application(application, didRegisterForRemoteNotificationsWithDeviceToken: deviceToken)
-        })
+            
+        }).disposed(by: self.disposeBag)
     }
     
     public func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
