@@ -1,6 +1,3 @@
-## 1.0.1
+## 1.0.2
 
-* Init Sdk chat plugin. 
-* Set user.
-* Open chat With another.
-* Open conversation.
+- Fix bug ios.

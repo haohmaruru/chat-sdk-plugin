@@ -1,11 +1,11 @@
-class HuraConfig {
+class ChatConfig {
   int appId;
   String appKey;
   String accountKey;
   AndroidConfig? androidConfig;
   IosConfig? iosConfig;
   // int? environment;
-  HuraConfig({
+  ChatConfig({
     required this.appId,
     required this.appKey,
     required this.accountKey,

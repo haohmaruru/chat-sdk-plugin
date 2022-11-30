@@ -13,26 +13,30 @@ class MethodChannelChatPluginFlutter extends ChatPluginFlutterPlatform {
   final methodChannel = const MethodChannel('chat_plugin_flutter');
 
   @override
-  Future<void> initChatSDK(HuraConfig config) async {
+  Future<void> initChatSDK(ChatConfig config) async {
     if (!hasInit) {
-      await methodChannel.invokeMethod<String>('initChatSDK', config.toJson());
+      await methodChannel.invokeMethod('initChatSDK', config.toJson());
       hasInit = true;
     }
   }
 
   @override
   Future<void> openChatConversation() async {
-    await methodChannel.invokeMethod<String>('openChatConversation');
+    await methodChannel.invokeMethod('openChatConversation');
   }
 
   @override
   Future<void> setUser(ChatUser user) async {
-    await methodChannel.invokeMethod<String>('setUser', user.toJson());
+    await methodChannel.invokeMethod('setUser', user.toJson());
   }
 
   @override
   Future<void> openChatWithAnother(ChatUser user) async {
-    await methodChannel.invokeMethod<String>(
-        'openChatWithAnother', user.toJson());
+    await methodChannel.invokeMethod('openChatWithAnother', user.toJson());
+  }
+
+  @override
+  Future<void> logout() async {
+    await methodChannel.invokeMethod('logout');
   }
 }

@@ -25,8 +25,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   String _platformVersion = 'Unknown';
 
-  late final ChatPluginFlutter _huraChatFlutterPlugin =
-      ChatPluginFlutter(config);
+  late final ChatPluginFlutter _chatFlutterPlugin = ChatPluginFlutter(config);
 // Dapp
 //   final HuraConfig config = HuraConfig(
 //     appId: 17,
@@ -47,15 +46,15 @@ class _MyAppState extends State<MyApp> {
 //   final userAnother = ChatUser(id: 4785074605935470, username: "Test123");
 
   // hura
-  final HuraConfig config = HuraConfig(
-    appId: 1,
-    appKey: "appKey",
-    accountKey: "adminkey",
-    iosConfig: IosConfig(
-      storeUrl: "https://apps.apple.com/vn/app/vndirect/id1594533471",
-      appGroupIdentifier: "group.hura.asia",
-    ),
-  );
+  final ChatConfig config = ChatConfig(
+      appId: 1,
+      appKey: "appKey",
+      accountKey: "adminkey",
+      iosConfig: IosConfig(
+        storeUrl: "https://apps.apple.com/vn/app/vndirect/id1594533471",
+        appGroupIdentifier: "group.hura.asia",
+      ),
+      androidConfig: AndroidConfig());
 
   final user = ChatUser(
       id: 2814749772802146,
@@ -78,7 +77,7 @@ class _MyAppState extends State<MyApp> {
     // Platform messages may fail, so we use a try/catch PlatformException.
     // We also handle the message potentially returning null.
     try {
-      _huraChatFlutterPlugin.initChatSDK();
+      _chatFlutterPlugin.initChatSDK();
       // _huraChatFlutterPlugin.setUser(user);
     } on PlatformException {
       platformVersion = 'Failed to get platform version.';
@@ -102,7 +101,7 @@ class _MyAppState extends State<MyApp> {
               TextButton(
                 onPressed: () {
                   // _huraChatFlutterPlugin.setUser(user);
-                  _huraChatFlutterPlugin.setUser(user);
+                  _chatFlutterPlugin.setUser(user);
                 },
                 child: Text(
                   "****set user***",
@@ -114,7 +113,7 @@ class _MyAppState extends State<MyApp> {
               TextButton(
                 onPressed: () {
                   // _huraChatFlutterPlugin.setUser(user);
-                  _huraChatFlutterPlugin.openChatWithAnother(userAnother);
+                  _chatFlutterPlugin.openChatWithAnother(userAnother);
                 },
                 child: Text(
                   "chat with user",
@@ -125,7 +124,7 @@ class _MyAppState extends State<MyApp> {
               ),
               TextButton(
                 onPressed: () {
-                  _huraChatFlutterPlugin.openChatConversation();
+                  _chatFlutterPlugin.openChatConversation();
                 },
                 child: Text(
                   "open chat conversation",

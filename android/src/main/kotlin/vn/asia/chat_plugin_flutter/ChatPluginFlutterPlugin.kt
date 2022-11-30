@@ -38,8 +38,13 @@ class ChatPluginFlutterPlugin : FlutterPlugin, MethodCallHandler {
             "openChatConversation" -> openChatConversation()
             "setUser" -> setUser(call, result)
             "openChatWithAnother" -> openChatWithAnother(call, result)
+            "logout"->logout()
             else -> result.notImplemented()
         }
+    }
+
+    private fun logout(){
+//        ChatSDK.
     }
 
     private fun setUser(call: MethodCall, result: Result) {

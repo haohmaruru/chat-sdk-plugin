@@ -3,7 +3,7 @@ import 'model/config.dart';
 import 'model/user.dart';
 
 class ChatPluginFlutter {
-  HuraConfig config;
+  ChatConfig config;
 
   ChatPluginFlutter(this.config);
 
@@ -21,5 +21,9 @@ class ChatPluginFlutter {
 
   Future<void> openChatWithAnother(ChatUser user) async {
     await ChatPluginFlutterPlatform.instance.openChatWithAnother(user);
+  }
+
+  Future<void> logout() async {
+    await ChatPluginFlutterPlatform.instance.logout();
   }
 }

@@ -1,15 +1,177 @@
-# chat_plugin_flutter
+# Chat Flutter Plugin
 
-A new Flutter plugin project.
+Supply a chat sdk simple for flutter project.
 
-## Getting Started
+## Features
 
-This project is a starting point for a Flutter
-[plug-in package](https://flutter.dev/developing-packages/),
-a specialized package that includes platform-specific implementation code for
-Android and/or iOS.
+- Import a Contact from your phone to chat contact.
+- Conversation chat, chat detail
+- Share location, image, video...
+- Video call, audio call
 
-For help getting started with Flutter development, view the
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Use
+
+Create a config:
+```flutter
+final ChatConfig config = ChatConfig(
+    appId: your app id,
+    appKey: your app key,
+    accountKey: your account key,
+    iosConfig: IosConfig(
+      storeUrl: <your app store url>,
+      appGroupIdentifier: <your app group>,
+    ),
+    androidConfig: AndroidConfig()
+  );
+```
+
+Create instance of plugin:
+```flutter
+final ChatPluginFlutter _chatFlutterPlugin = ChatPluginFlutter(config);
+```
+
+Call method initChatSDK() be fore use:
+```flutter
+_chatFlutterPlugin.initChatSDK();
+```
+
+Set user:
+```flutter
+ _chatFlutterPlugin.setUser(user);
+```
+
+Open chat conversation (after set user):
+```flutter
+ _chatFlutterPlugin.openChatConversation();
+```
+
+Open chat with another (after set user):
+```flutter
+ _chatFlutterPlugin.openChatWithAnother(userAnother);
+```
+Logout:
+```flutter
+ _chatFlutterPlugin.logout();
+```
+
+
+## Installation
+
+### Ios
+
+Add dependencies to your **Podfile**
+
+```swift
+.... your dependencies ...
+
+def netalo_sdks
+  pod 'NetacomSDKs', :git => 'https://github.com/Netacom-NetAlo/NetaloSDKs-iOS', tag: '10.0.1'
+end
+
+def netalo_sdks_notification
+  pod 'NotificationSDK', :git => 'https://github.com/Netacom-NetAlo/NotiSDKs-iOS', tag: '10.0.1'
+end
+
+def netalo_webrtc
+  pod 'WebRTC', :git => 'https://github.com/Netacom-NetAlo/WebRTC-iOS', branch: 'main'
+end
+
+def netalo_resolver
+  pod 'Resolver', :git => 'https://github.com/Netacom-NetAlo/Resolver-iOS', branch: 'main'
+end
+
+def netalo_messagekit
+  pod 'MessageKit', :git => 'https://github.com/Netacom-NetAlo/Messagekit-iOS'
+end
+```
+
+Add to target **Runner** in your **Podfile**
+
+```swift
+target 'Runner' do
+  use_frameworks!
+  use_modular_headers!
+  
+  flutter_install_all_ios_pods File.dirname(File.realpath(__FILE__))
+  .... your dependencies ...
+  
+  # sdk chat'
+  netalo_sdks
+  netalo_sdks_notification
+  netalo_webrtc
+  netalo_resolver
+  netalo_messagekit
+  # sdk chat
+  
+end
+```
+
+And add build_configurations in **Podfile**
+
+```swift
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    flutter_additional_ios_build_settings(target)
+    
+    # sdk chat
+    target.build_configurations.each do |config|
+      config.build_settings['ENABLE_BITCODE'] = 'NO'
+      config.build_settings['ARCHS'] = 'arm64 x86_64'
+    end
+    # sdk chat
+    
+  end
+end
+```
+
+If you implement notification. Let add dependencies to target **NotificationExtension** in your **Podfile**
+
+```swift
+target 'NotificationExtension' do
+  .... your dependencies ...
+  
+  # sdk chat'
+  netalo_sdks_notification
+  netalo_webrtc
+  netalo_resolver
+  # sdk chat
+  
+end
+```
+
+If you need to override some method of Notification then add code to these function. else No need to do anything.
+
+```swift
+public override func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+
+.... your code ...
+
+    # sdk chat'
+    SwiftChatPluginFlutterPlugin.instance.application(application, didRegisterForRemoteNotificationsWithDeviceToken: deviceToken)
+    # sdk chat'
+}
+    
+public override func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        
+        .... your code ...
+        
+    # sdk chat'
+    SwiftChatPluginFlutterPlugin.instance.userNotificationCenter(center, willPresent: notification, withCompletionHandler: completionHandler)
+    # sdk chat'
+}
+
+public override func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        
+        .... your code ...
+    
+    # sdk chat'
+    SwiftChatPluginFlutterPlugin.instance.userNotificationCenter(center, didReceive: response, withCompletionHandler: completionHandler)
+    # sdk chat'
+}   
+```
+
+
+## Android
+No need to do anything more
+
 

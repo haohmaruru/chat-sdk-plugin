@@ -25,7 +25,7 @@ abstract class ChatPluginFlutterPlatform extends PlatformInterface {
     _instance = instance;
   }
 
-  Future<void> initChatSDK(HuraConfig config) {
+  Future<void> initChatSDK(ChatConfig config) {
     throw UnimplementedError('initChatSDK() has not been implemented.');
   }
 
@@ -40,5 +40,9 @@ abstract class ChatPluginFlutterPlatform extends PlatformInterface {
 
   Future<void> openChatWithAnother(ChatUser user) {
     throw UnimplementedError('openChatWithAnother() has not been implemented.');
+  }
+
+  Future<void> logout() {
+    throw UnimplementedError('logout() has not been implemented.');
   }
 }

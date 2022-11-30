@@ -1,3 +1,13 @@
+//
+//  Plugin.swift
+//  Runner
+//
+//  Created by Meo luoi on 30/11/2022.
+//
+
+import Foundation
+
+
 import Flutter
 import UIKit
 import NetAloLite
@@ -14,13 +24,11 @@ public class SwiftChatPluginFlutterPlugin: NSObject, FlutterPlugin {
     public static let instance = SwiftChatPluginFlutterPlugin()
         
     let subject = PublishSubject<String>()
-    private var disposable:Disposable?
     
     public static func register(with registrar: FlutterPluginRegistrar) {
         let channel = FlutterMethodChannel(name: "chat_plugin_flutter", binaryMessenger: registrar.messenger())
         //        let instance = SwiftChatPluginFlutterPlugin()
         registrar.addMethodCallDelegate(instance, channel: channel)
-        registrar.addApplicationDelegate(instance)
     }
     
     public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
@@ -37,16 +45,9 @@ public class SwiftChatPluginFlutterPlugin: NSObject, FlutterPlugin {
         case "openChatWithAnother":
             openChatWithAnother(call:call,result: result)
             break
-        case "logout":
-            logout()
-            break
         default: result(FlutterMethodNotImplemented)
             break
         }
-    }
-    
-    private func logout(){
-        self.netAloSDK?.logout()
     }
     
     private func initChatSDK( call: FlutterMethodCall, result: @escaping FlutterResult){
@@ -158,27 +159,28 @@ public class SwiftChatPluginFlutterPlugin: NSObject, FlutterPlugin {
         
     }
     
-    public func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [AnyHashable : Any] = [:]) -> Bool {
-        print("didFinishLaunchingWithOptions")
+    public func application(
+        _ application: UIApplication,
+        didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
+    ) -> Bool{
         self.subject.subscribe(onNext: { string in
-            self.netAloSDK?.application(application, didFinishLaunchingWithOptions: launchOptions as? [UIApplication.LaunchOptionsKey: Any])
+            self.netAloSDK?.application(application, didFinishLaunchingWithOptions: launchOptions)
         })
         return true
     }
     
+    // MARK: - AppDelegateViewModelOutputs
+    
     public func applicationDidBecomeActive(_ application: UIApplication) {
         self.netAloSDK?.applicationDidBecomeActive(application)
-        print("applicationDidBecomeActive")
     }
     
     public func applicationWillResignActive(_ application: UIApplication) {
         self.netAloSDK?.applicationWillResignActive(application)
-        print("applicationWillResignActive")
     }
     
     public func applicationWillTerminate(_ application: UIApplication) {
         self.netAloSDK?.applicationWillTerminate(application)
-        print("applicationWillTerminate")
     }
     
     // UserActivity
@@ -188,7 +190,6 @@ public class SwiftChatPluginFlutterPlugin: NSObject, FlutterPlugin {
     
     // Notification methods
     public func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        print("didRegisterForRemoteNotificationsWithDeviceToken")
         self.subject.subscribe(onNext: { string in
             self.netAloSDK?.application(application, didRegisterForRemoteNotificationsWithDeviceToken: deviceToken)
         })
@@ -204,13 +205,11 @@ public class SwiftChatPluginFlutterPlugin: NSObject, FlutterPlugin {
     
     // MARK: - UNUserNotificationCenterDelegate
     public func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        print("userNotificationCenter  willPresent")
+            
         self.netAloSDK?.userNotificationCenter(center, willPresent: notification, withCompletionHandler: completionHandler)
     }
     
     public func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        print("userNotificationCenter didReceive")
         self.netAloSDK?.userNotificationCenter(center, didReceive: response, withCompletionHandler: completionHandler)
     }
-    
 }
