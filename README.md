@@ -139,37 +139,6 @@ target 'NotificationExtension' do
 end
 ```
 
-If you need to override some method of Notification then add code to these function. else No need to do anything.
-
-```swift
-public override func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-
-.... your code ...
-
-    # sdk chat'
-    SwiftChatPluginFlutterPlugin.instance.application(application, didRegisterForRemoteNotificationsWithDeviceToken: deviceToken)
-    # sdk chat'
-}
-    
-public override func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        
-        .... your code ...
-        
-    # sdk chat'
-    SwiftChatPluginFlutterPlugin.instance.userNotificationCenter(center, willPresent: notification, withCompletionHandler: completionHandler)
-    # sdk chat'
-}
-
-public override func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        
-        .... your code ...
-    
-    # sdk chat'
-    SwiftChatPluginFlutterPlugin.instance.userNotificationCenter(center, didReceive: response, withCompletionHandler: completionHandler)
-    # sdk chat'
-}   
-```
-
 Add code to your **NotificationService**:
 
 ```swift
@@ -227,6 +196,37 @@ class NotificationService: UNNotificationServiceExtension {
     }
     
 }
+```
+
+If you need to override some method of Notification then add code to these function. else No need to do anything.
+
+```swift
+public override func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+
+.... your code ...
+
+    # sdk chat'
+    SwiftChatPluginFlutterPlugin.instance.application(application, didRegisterForRemoteNotificationsWithDeviceToken: deviceToken)
+    # sdk chat'
+}
+    
+public override func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        
+        .... your code ...
+        
+    # sdk chat'
+    SwiftChatPluginFlutterPlugin.instance.userNotificationCenter(center, willPresent: notification, withCompletionHandler: completionHandler)
+    # sdk chat'
+}
+
+public override func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        
+        .... your code ...
+    
+    # sdk chat'
+    SwiftChatPluginFlutterPlugin.instance.userNotificationCenter(center, didReceive: response, withCompletionHandler: completionHandler)
+    # sdk chat'
+}   
 ```
 
 
