@@ -18,12 +18,6 @@ import chat_plugin_flutter
         if #available(iOS 10.0, *) {
             UNUserNotificationCenter.current().delegate = self
         }
-    
-        
-        //   start sdk chat
-    
-//        SwiftChatPluginFlutterPlugin.instance.application(application, didFinishLaunchingWithOptions: launchOptions)
-        //  end sdk chat
 
         return super.application(application, didFinishLaunchingWithOptions: launchOptions)
     }
@@ -64,31 +58,31 @@ import chat_plugin_flutter
 //    }
 //
     // Notification methods
-    public override func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-
-        SwiftChatPluginFlutterPlugin.instance.application(application, didRegisterForRemoteNotificationsWithDeviceToken: deviceToken)
-    }
-
-    override func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
-        SwiftChatPluginFlutterPlugin.instance.application(application, open: url, sourceApplication: sourceApplication, annotation: application)
-    }
-
-    override func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-        SwiftChatPluginFlutterPlugin.instance.application(app, open: url, options: options)
-    }
+//    public override func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+//
+//        SwiftChatPluginFlutterPlugin.instance.application(application, didRegisterForRemoteNotificationsWithDeviceToken: deviceToken)
+//    }
+//
+//    override func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+//        SwiftChatPluginFlutterPlugin.instance.application(application, open: url, sourceApplication: sourceApplication, annotation: application)
+//    }
+//
+//    override func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+//        SwiftChatPluginFlutterPlugin.instance.application(app, open: url, options: options)
+//    }
 
     //  end sdk chat
 
     //  notification
     //  start sdk chat
     // MARK: - UNUserNotificationCenterDelegate
-    public override func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        SwiftChatPluginFlutterPlugin.instance.userNotificationCenter(center, willPresent: notification, withCompletionHandler: completionHandler)
-    }
-
-    public override func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        SwiftChatPluginFlutterPlugin.instance.userNotificationCenter(center, didReceive: response, withCompletionHandler: completionHandler)
-    }
+//    public override func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+//        SwiftChatPluginFlutterPlugin.instance.userNotificationCenter(center, willPresent: notification, withCompletionHandler: completionHandler)
+//    }
+//
+//    public override func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+//        SwiftChatPluginFlutterPlugin.instance.userNotificationCenter(center, didReceive: response, withCompletionHandler: completionHandler)
+//    }
     
     //  end sdk chat
 }
