@@ -17,6 +17,7 @@ const String your_app_key = ""; // must replace for your app
 const String your_account_key = ""; // must replace for your app
 const String your_store_url = ""; // must replace for your app
 const String your_app_group = ""; // must replace for your app ios
+
 final ChatConfig config = ChatConfig(
     appId: your_app_id,
     appKey: your_app_key,
