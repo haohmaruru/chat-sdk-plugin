@@ -45,4 +45,9 @@ abstract class ChatPluginFlutterPlatform extends PlatformInterface {
   Future<void> logout() {
     throw UnimplementedError('logout() has not been implemented.');
   }
+
+  Future<void> handleChatNotification(Map<String, dynamic> remoteMessageData) {
+    throw UnimplementedError(
+        'handleChatNotification() has not been implemented.');
+  }
 }

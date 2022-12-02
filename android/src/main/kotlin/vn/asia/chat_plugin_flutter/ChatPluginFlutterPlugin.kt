@@ -1,12 +1,14 @@
 package vn.asia.chat_plugin_flutter
 
 import android.content.Context
+import android.os.Bundle
 import android.util.Log
 import androidx.annotation.NonNull
 import com.asia.sdkcore.config.Environment
 import com.asia.sdkcore.model.sdk.*
 import com.asia.sdkcore.model.ui.user.NeUser
 import com.asia.sdkui.sdk.ChatSDK
+import com.google.firebase.messaging.RemoteMessage
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
@@ -39,6 +41,7 @@ class ChatPluginFlutterPlugin : FlutterPlugin, MethodCallHandler {
             "setUser" -> setUser(call, result)
             "openChatWithAnother" -> openChatWithAnother(call, result)
             "logout"->logout()
+            "handleChatNotification"-> handleChatNotification(call, result)
             else -> result.notImplemented()
         }
     }
@@ -46,6 +49,13 @@ class ChatPluginFlutterPlugin : FlutterPlugin, MethodCallHandler {
     private fun logout(){
 //        ChatSDK.
     }
+
+    private fun handleChatNotification(call: MethodCall, result: Result){
+        val data: HashMap<String, Any> = call.arguments as HashMap<String, Any>
+        Log.e("handleChatNotification",data.toString())
+
+    }
+
 
     private fun setUser(call: MethodCall, result: Result) {
         ChatSDK.setUserSDK(

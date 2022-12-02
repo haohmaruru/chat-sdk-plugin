@@ -9,7 +9,7 @@ Supply a chat sdk simple for flutter project.
 - Share location, image, video...
 - Video call, audio call
 
-## Use
+## How to Use
 
 Create a config:
 ```flutter
@@ -27,37 +27,70 @@ final ChatConfig config = ChatConfig(
 
 Create instance of plugin:
 ```flutter
-final ChatPluginFlutter _chatFlutterPlugin = ChatPluginFlutter(config);
+final ChatPluginFlutter chatFlutterPlugin = ChatPluginFlutter(config);
 ```
 
 Call method **initChatSDK()** be fore use:
 ```flutter
-_chatFlutterPlugin.initChatSDK();
+chatFlutterPlugin.initChatSDK();
 ```
 
 Set user:
 ```flutter
- _chatFlutterPlugin.setUser(user);
+ chatFlutterPlugin.setUser(user);
 ```
 
 Open chat conversation (after set user):
 ```flutter
- _chatFlutterPlugin.openChatConversation();
+ chatFlutterPlugin.openChatConversation();
 ```
 
 Open chat with another (after set user):
 ```flutter
- _chatFlutterPlugin.openChatWithAnother(userAnother);
+ chatFlutterPlugin.openChatWithAnother(userAnother);
 ```
 Logout:
 ```flutter
- _chatFlutterPlugin.logout();
+ chatFlutterPlugin.logout();
+```
+
+### Handle Notification message (ex: from firebase):
+```flutter
+ chatFlutterPlugin.handleChatNotification(message.data);
+```
+
+Example:
+```flutter
+FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
+       ........  your code ........
+       // sdk chat
+       chatFlutterPlugin.handleChatNotification(message.data);
+       // sdk chat
+});
+      
+FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+        ........  your code ........
+       // sdk chat
+       chatFlutterPlugin.handleChatNotification(message.data);
+       // sdk chat
+});
+
+FirebaseMessaging.instance
+        .getInitialMessage()
+        .then((RemoteMessage? message) {
+        ........  your code ........
+       // sdk chat
+      if (message != null) {
+        chatFlutterPlugin.handleChatNotification(message.data);
+      }
+      // sdk chat
+    });
 ```
 
 
-## Installation
+## Set up
 
-### Ios
+### Ios:
 
 **This sdk require ios >=13.0.**
 
@@ -128,6 +161,13 @@ post_install do |installer|
   end
 end
 ```
+
+Please add some permissions in **Plist.info**:
+- NSMicrophoneUsageDescription
+- NSCameraUsageDescription
+- NSPhotoLibraryUsageDescription
+- NSContactsUsageDescription (If you want to sync contact)
+- NSLocationAlwaysAndWhenInUseUsageDescription (If you want to share location). If you want to use feature **Live location** please enable ***Location updates*** in your runner -> Signing and capabilities -> Background Modes -> Tick ***Location updates***.
 
 If you implement notification. Let add dependencies to target **NotificationExtension** in your **Podfile**
 
@@ -203,7 +243,7 @@ class NotificationService: UNNotificationServiceExtension {
 }
 ```
 
-If you need to override some method of Notification then add code to these function. else No need to do anything.
+If you need to override some method of Notification in **AppDelegate** then add code to these function else you no need to do anything.
 
 ```swift
 public override func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
@@ -236,6 +276,4 @@ public override func userNotificationCenter(_ center: UNUserNotificationCenter, 
 
 
 ## Android
-No need to do anything more
-
-
+**This sdk require minSdkVersion 24, targetSdkVersion 31**
