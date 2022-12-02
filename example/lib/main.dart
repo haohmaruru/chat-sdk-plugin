@@ -27,7 +27,7 @@ final ChatConfig config = ChatConfig(
     ),
     androidConfig: AndroidConfig());
 
-late final ChatPluginFlutter chatFlutterPlugin = ChatPluginFlutter(config);
+final ChatPluginFlutter chatFlutterPlugin = ChatPluginFlutter.config(config);
 
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
