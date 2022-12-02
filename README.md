@@ -27,7 +27,7 @@ final ChatConfig config = ChatConfig(
 
 Create instance of plugin:
 ```flutter
-final ChatPluginFlutter chatFlutterPlugin = ChatPluginFlutter(config);
+final ChatPluginFlutter chatFlutterPlugin = ChatPluginFlutter.config(config);
 ```
 
 Call method **initChatSDK()** be fore use:
