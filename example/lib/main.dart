@@ -12,16 +12,22 @@ void main() async {
   runApp(const MyApp());
 }
 
-late final ChatPluginFlutter chatFlutterPlugin = ChatPluginFlutter(config);
+const int your_app_id = 0; // must replace for your app
+const String your_app_key = ""; // must replace for your app
+const String your_account_key = ""; // must replace for your app
+const String your_store_url = ""; // must replace for your app
+const String your_app_group = ""; // must replace for your app ios
 final ChatConfig config = ChatConfig(
-    appId: 1,
-    appKey: "appKey",
-    accountKey: "adminkey",
+    appId: your_app_id,
+    appKey: your_app_key,
+    accountKey: your_account_key,
     iosConfig: IosConfig(
-      storeUrl: "https://apps.apple.com/vn/app/vndirect/id1594533471",
-      appGroupIdentifier: "group.hura.asia",
+      storeUrl: your_store_url,
+      appGroupIdentifier: your_app_group,
     ),
     androidConfig: AndroidConfig());
+
+late final ChatPluginFlutter chatFlutterPlugin = ChatPluginFlutter(config);
 
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -33,22 +39,6 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   String _platformVersion = 'Unknown';
 
-  late final ChatPluginFlutter _chatFlutterPlugin = ChatPluginFlutter(config);
-  static const int your_app_id = 0; // must replace for your app
-  static const String your_app_key = ""; // must replace for your app
-  static const String your_account_key = ""; // must replace for your app
-  static const String your_store_url = ""; // must replace for your app
-  static const String your_app_group = ""; // must replace for your app ios
-  final ChatConfig config = ChatConfig(
-      appId: your_app_id,
-      appKey: your_app_key,
-      accountKey: your_account_key,
-      iosConfig: IosConfig(
-        storeUrl: your_store_url,
-        appGroupIdentifier: your_app_group,
-      ),
-      androidConfig: AndroidConfig());
-
   final user = ChatUser(); // let set your user info
 
   final userAnother = ChatUser(); // let set your user info
@@ -57,7 +47,7 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
     PushNotificationManager().init();
-    _chatFlutterPlugin.initChatSDK();
+    chatFlutterPlugin.initChatSDK();
   }
 
   @override
@@ -87,7 +77,7 @@ class _MyAppState extends State<MyApp> {
               ),
               TextButton(
                 onPressed: () {
-                  _chatFlutterPlugin.openChatWithAnother(userAnother);
+                  chatFlutterPlugin.openChatWithAnother(userAnother);
                 },
                 child: Text(
                   "chat with user",
