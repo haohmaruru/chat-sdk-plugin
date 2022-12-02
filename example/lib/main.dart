@@ -12,6 +12,17 @@ void main() async {
   runApp(const MyApp());
 }
 
+late final ChatPluginFlutter chatFlutterPlugin = ChatPluginFlutter(config);
+final ChatConfig config = ChatConfig(
+    appId: 1,
+    appKey: "appKey",
+    accountKey: "adminkey",
+    iosConfig: IosConfig(
+      storeUrl: "https://apps.apple.com/vn/app/vndirect/id1594533471",
+      appGroupIdentifier: "group.hura.asia",
+    ),
+    androidConfig: AndroidConfig());
+
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
@@ -65,7 +76,7 @@ class _MyAppState extends State<MyApp> {
               TextButton(
                 onPressed: () {
                   // _huraChatFlutterPlugin.setUser(user);
-                  _chatFlutterPlugin.setUser(user);
+                  chatFlutterPlugin.setUser(user);
                 },
                 child: Text(
                   "****set user***",
@@ -87,7 +98,7 @@ class _MyAppState extends State<MyApp> {
               ),
               TextButton(
                 onPressed: () {
-                  _chatFlutterPlugin.openChatConversation();
+                  chatFlutterPlugin.openChatConversation();
                 },
                 child: Text(
                   "open chat conversation",

@@ -39,4 +39,11 @@ class MethodChannelChatPluginFlutter extends ChatPluginFlutterPlatform {
   Future<void> logout() async {
     await methodChannel.invokeMethod('logout');
   }
+
+  @override
+  Future<void> handleChatNotification(
+      Map<String, dynamic> remoteMessageData) async {
+    await methodChannel.invokeMethod(
+        'handleChatNotification', remoteMessageData);
+  }
 }

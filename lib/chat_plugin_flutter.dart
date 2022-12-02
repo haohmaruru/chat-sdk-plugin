@@ -26,4 +26,11 @@ class ChatPluginFlutter {
   Future<void> logout() async {
     await ChatPluginFlutterPlatform.instance.logout();
   }
+
+  @override
+  Future<void> handleChatNotification(
+      Map<String, dynamic> remoteMessageData) async {
+    await ChatPluginFlutterPlatform.instance
+        .handleChatNotification(remoteMessageData);
+  }
 }

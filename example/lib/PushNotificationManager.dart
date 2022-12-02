@@ -1,5 +1,7 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 
+import 'main.dart';
+
 class PushNotificationManager {
   bool isInit = false;
 
@@ -21,21 +23,22 @@ class PushNotificationManager {
         .getInitialMessage()
         .then((RemoteMessage? message) {
       if (message != null) {
-        print("Firebase message: ${message.data.toString()}");
+        chatFlutterPlugin.handleChatNotification(message.data);
       }
     });
+
     if (!isInit) {
       FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
         try {
-          var notification = _getNotification(message);
-          print("Firebase onMessage: ${message.data.toString()}");
+          chatFlutterPlugin.handleChatNotification(message.data);
         } catch (e) {
           print(e);
         }
       });
+
       //Truong hop app chay background nhung chua tat han
       FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-        print("Firebase onMessageOpenedApp: ${message.data.toString()}");
+        chatFlutterPlugin.handleChatNotification(message.data);
       });
     }
 
