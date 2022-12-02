@@ -15,7 +15,7 @@ void main() async {
   runApp(const MyApp());
 }
 
-late final ChatPluginFlutter chatFlutterPlugin = ChatPluginFlutter(config);
+final ChatPluginFlutter chatFlutterPlugin = ChatPluginFlutter.config(config);
 final ChatConfig config = ChatConfig(
     appId: 1,
     appKey: "appKey",
