@@ -2,15 +2,9 @@
 
 Demonstrates how to use the chat_plugin_flutter plugin.
 
-## Getting Started
+## How to run this example
 
-This project is a starting point for a Flutter application.
+- First step: contact us to register key to use this plugin.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Next step: please register app with **Firebase Message** and down load file **google-service.json** add to directory ***android/app***,
+file **GoogleService-info.plist** add to directory  ***ios/Runner***. After that you can run example.
