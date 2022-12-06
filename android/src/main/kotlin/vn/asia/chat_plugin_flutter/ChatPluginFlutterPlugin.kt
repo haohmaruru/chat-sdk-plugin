@@ -53,7 +53,7 @@ class ChatPluginFlutterPlugin : FlutterPlugin, MethodCallHandler {
     private fun handleChatNotification(call: MethodCall, result: Result){
         val data: HashMap<String, Any> = call.arguments as HashMap<String, Any>
         Log.e("handleChatNotification",data.toString())
-
+        ChatSDK.handleNotification(data)
     }
 
 
